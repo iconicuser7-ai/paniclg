@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Panimalar Engineering College</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold: #B8933F;
+    --gold-light: #D4AF6A;
+    --gold-pale: #F5EDD8;
+    --navy: #0D1B2A;
+    --navy-mid: #1A2E44;
+    --cream: #FAF7F2;
+    --text: #1A1A1A;
+    --muted: #6B6459;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Josefin Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.4rem 4rem;
+    background: rgba(13,27,42,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(184,147,63,0.25);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.45rem;
+    font-weight: 600;
+    color: var(--gold-light);
+    letter-spacing: 0.04em;
+  }
+  .nav-logo span { color: #fff; font-weight: 400; }
+  .nav-links { display: flex; gap: 2.4rem; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.72);
+    text-decoration: none;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold-light); }
+  .nav-cta {
+    background: var(--gold);
+    color: var(--navy);
+    padding: 0.55rem 1.6rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 600;
+    text-decoration: none;
+    border: none; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold-light); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: var(--navy);
+    position: relative;
+    display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+    padding: 0 4rem 0 4rem;
+    overflow: hidden;
+  }
+  .hero-bg-lines {
+    position: absolute; top: 0; right: 0; width: 55%; height: 100%;
+    opacity: 0.07;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 48px, rgba(184,147,63,1) 48px, rgba(184,147,63,1) 49px),
+      repeating-linear-gradient(90deg, transparent, transparent 48px, rgba(184,147,63,1) 48px, rgba(184,147,63,1) 49px);
+    pointer-events: none;
+  }
+  .hero-accent {
+    position: absolute; bottom: -80px; right: -80px;
+    width: 520px; height: 520px;
+    border: 1px solid rgba(184,147,63,0.18);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .hero-accent2 {
+    position: absolute; bottom: -20px; right: -20px;
+    width: 380px; height: 380px;
+    border: 1px solid rgba(184,147,63,0.1);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .hero-tag {
+    font-size: 0.68rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.6rem;
+    opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 6vw, 5.4rem);
+    font-weight: 500;
+    color: #fff;
+    line-height: 1.08;
+    max-width: 680px;
+    opacity: 0; animation: fadeUp 0.9s 0.35s forwards;
+  }
+  .hero h1 em { color: var(--gold-light); font-style: italic; }
+  .hero-sub {
+    margin-top: 1.8rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.5);
+    max-width: 440px;
+    line-height: 1.8;
+    opacity: 0; animation: fadeUp 0.9s 0.5s forwards;
+  }
+  .hero-actions {
+    margin-top: 2.8rem;
+    display: flex; gap: 1.2rem; align-items: center;
+    opacity: 0; animation: fadeUp 0.9s 0.65s forwards;
+  }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--navy);
+    padding: 0.85rem 2.2rem;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+    text-decoration: none;
+    border: none; cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-ghost {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: flex; align-items: center; gap: 0.5rem;
+    transition: color 0.2s;
+  }
+  .btn-ghost:hover { color: var(--gold-light); }
+  .btn-ghost svg { transition: transform 0.2s; }
+  .btn-ghost:hover svg { transform: translateX(4px); }
+
+  .hero-stats {
+    position: absolute; bottom: 3rem; left: 4rem;
+    display: flex; gap: 3.5rem;
+    opacity: 0; animation: fadeUp 0.9s 0.8s forwards;
+  }
+  .hero-stat { border-left: 1px solid rgba(184,147,63,0.4); padding-left: 1.2rem; }
+  .hero-stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 600;
+    color: var(--gold-light);
+    line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 0.62rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: rgba(255,255,255,0.4);
+    margin-top: 0.3rem;
+  }
+
+  /* DIVIDER */
+  .divider {
+    display: flex; align-items: center; gap: 1.5rem;
+    padding: 0 4rem;
+  }
+  .divider-line { flex: 1; height: 1px; background: rgba(184,147,63,0.25); }
+  .divider-icon { color: var(--gold); font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; white-space: nowrap; }
+
+  /* ABOUT SECTION */
+  .section { padding: 6rem 4rem; }
+  .section-tag {
+    font-size: 0.65rem; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 500; line-height: 1.15;
+    color: var(--navy);
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+    align-items: center; margin-top: 3.5rem;
+  }
+  .about-text p {
+    font-size: 0.9rem; line-height: 1.9; color: var(--muted);
+    margin-bottom: 1.4rem;
+  }
+  .about-text p strong { color: var(--navy); font-weight: 600; }
+  .about-img {
+    position: relative;
+  }
+  .about-img-frame {
+    width: 100%; padding-top: 110%;
+    background: linear-gradient(135deg, var(--navy-mid), var(--navy));
+    position: relative; overflow: hidden;
+  }
+  .about-img-frame::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      45deg, transparent, transparent 16px,
+      rgba(184,147,63,0.04) 16px, rgba(184,147,63,0.04) 17px
+    );
+  }
+  .about-img-label {
+    position: absolute; top: 0; right: -1.5rem;
+    background: var(--gold);
+    color: var(--navy);
+    padding: 1.2rem 1rem;
+    writing-mode: vertical-rl; text-orientation: mixed;
+    font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase;
+    font-weight: 600;
+  }
+  .about-img-text {
+    position: absolute; bottom: 2rem; left: 2rem; right: 3rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; color: rgba(255,255,255,0.12);
+    line-height: 1.3; font-style: italic;
+  }
+  .about-img-badge {
+    position: absolute; bottom: -1.5rem; left: -1.5rem;
+    background: var(--navy);
+    border: 1px solid rgba(184,147,63,0.3);
+    padding: 1.5rem 2rem;
+  }
+  .about-img-badge-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.6rem; font-weight: 600; color: var(--gold-light); line-height: 1;
+  }
+  .about-img-badge-text {
+    font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(255,255,255,0.45); margin-top: 0.3rem;
+  }
+
+  /* PROGRAMS */
+  .programs-bg {
+    background: var(--navy);
+    padding: 6rem 4rem;
+  }
+  .programs-bg .section-title { color: #fff; }
+  .programs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(184,147,63,0.15);
+    margin-top: 3.5rem;
+    border: 1px solid rgba(184,147,63,0.15);
+  }
+  .program-card {
+    background: var(--navy);
+    padding: 2.4rem 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+    cursor: default;
+  }
+  .program-card::before {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+    background: var(--gold);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  .program-card:hover { background: var(--navy-mid); }
+  .program-card:hover::before { transform: scaleX(1); }
+  .program-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem; font-weight: 400;
+    color: rgba(184,147,63,0.1);
+    position: absolute; top: 1rem; right: 1.5rem;
+    line-height: 1; transition: color 0.3s;
+  }
+  .program-card:hover .program-num { color: rgba(184,147,63,0.2); }
+  .program-icon {
+    width: 44px; height: 44px;
+    border: 1px solid rgba(184,147,63,0.3);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+  .program-icon svg { width: 22px; height: 22px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+  .program-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-weight: 500; color: #fff;
+    line-height: 1.25; margin-bottom: 0.75rem;
+  }
+  .program-desc {
+    font-size: 0.78rem; letter-spacing: 0.04em; line-height: 1.75;
+    color: rgba(255,255,255,0.4);
+  }
+  .program-link {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    margin-top: 1.4rem;
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); text-decoration: none;
+    transition: gap 0.2s;
+  }
+  .program-link:hover { gap: 0.8rem; }
+
+  /* WHY SECTION */
+  .why-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+    align-items: start; margin-top: 3.5rem;
+  }
+  .why-features { display: flex; flex-direction: column; gap: 2rem; }
+  .why-feature {
+    display: flex; gap: 1.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(184,147,63,0.15);
+  }
+  .why-feature:last-child { border-bottom: none; padding-bottom: 0; }
+  .why-feature-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 500; color: var(--gold-light);
+    opacity: 0.35; flex-shrink: 0; line-height: 1;
+  }
+  .why-feature-content h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; font-weight: 600; color: var(--navy);
+    margin-bottom: 0.5rem;
+  }
+  .why-feature-content p {
+    font-size: 0.82rem; color: var(--muted); line-height: 1.8;
+  }
+  .why-quote {
+    background: var(--navy);
+    padding: 3rem;
+    position: relative;
+    margin-top: 1rem;
+  }
+  .why-quote::before {
+    content: '"';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 7rem; line-height: 0.6;
+    color: rgba(184,147,63,0.15);
+    position: absolute; top: 2rem; left: 2rem;
+  }
+  .why-quote p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-style: italic; font-weight: 400;
+    color: #fff; line-height: 1.5; position: relative; z-index: 1;
+  }
+  .why-quote-attr {
+    margin-top: 1.5rem;
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold);
+  }
+  .stats-row {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
+    background: rgba(184,147,63,0.2);
+    border: 1px solid rgba(184,147,63,0.2);
+    margin-top: 2rem;
+  }
+  .stat-box {
+    background: #fff;
+    padding: 1.8rem 1.5rem;
+    text-align: center;
+  }
+  .stat-box-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem; font-weight: 500; color: var(--gold);
+    line-height: 1;
+  }
+  .stat-box-label {
+    font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted); margin-top: 0.4rem;
+  }
+
+  /* LOCATION */
+  .location-section {
+    background: var(--navy);
+    padding: 6rem 4rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
+  }
+  .location-section .section-title { color: #fff; }
+  .location-info { display: flex; flex-direction: column; gap: 1.8rem; margin-top: 2rem; }
+  .location-item { display: flex; gap: 1.2rem; align-items: flex-start; }
+  .location-item-icon {
+    width: 36px; height: 36px; flex-shrink: 0;
+    border: 1px solid rgba(184,147,63,0.3);
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 2px;
+  }
+  .location-item-icon svg { width: 16px; height: 16px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+  .location-item-text h5 {
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.35rem;
+  }
+  .location-item-text p { font-size: 0.84rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+  .map-placeholder {
+    background: var(--navy-mid);
+    border: 1px solid rgba(184,147,63,0.15);
+    aspect-ratio: 4/3;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 0.8rem;
+  }
+  .map-placeholder svg { width: 36px; height: 36px; stroke: rgba(184,147,63,0.4); fill: none; stroke-width: 1; }
+  .map-placeholder p {
+    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: rgba(184,147,63,0.4);
+  }
+  .map-placeholder a {
+    color: var(--gold);
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    text-decoration: none; border-bottom: 1px solid rgba(184,147,63,0.4);
+    padding-bottom: 2px; transition: border-color 0.2s;
+  }
+  .map-placeholder a:hover { border-color: var(--gold); }
+
+  /* CTA BANNER */
+  .cta-banner {
+    background: var(--gold);
+    padding: 5rem 4rem;
+    display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+  }
+  .cta-banner h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 500; color: var(--navy); line-height: 1.2;
+  }
+  .cta-banner h2 em { font-style: italic; }
+  .btn-dark {
+    background: var(--navy);
+    color: var(--gold-light);
+    padding: 0.9rem 2.4rem;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+    font-weight: 600; text-decoration: none; white-space: nowrap;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-dark:hover { background: var(--navy-mid); transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer {
+    background: #080F17;
+    padding: 4rem 4rem 2.5rem;
+    border-top: 1px solid rgba(184,147,63,0.15);
+  }
+  .footer-top {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-brand { }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-weight: 600; color: var(--gold-light);
+    margin-bottom: 1rem;
+  }
+  .footer-brand p {
+    font-size: 0.8rem; line-height: 1.8; color: rgba(255,255,255,0.35);
+    max-width: 260px;
+  }
+  .footer-col h6 {
+    font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.2rem;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+  .footer-col a {
+    font-size: 0.8rem; color: rgba(255,255,255,0.35);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .footer-col a:hover { color: rgba(255,255,255,0.7); }
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 2rem;
+  }
+  .footer-bottom p {
+    font-size: 0.72rem; color: rgba(255,255,255,0.2);
+    letter-spacing: 0.06em;
+  }
+  .footer-bottom a { color: rgba(184,147,63,0.5); text-decoration: none; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 0 1.5rem; }
+    .hero-stats { left: 1.5rem; }
+    .section, .programs-bg { padding: 4rem 1.5rem; }
+    .about-grid, .why-grid, .location-section { grid-template-columns: 1fr; gap: 2.5rem; }
+    .programs-grid { grid-template-columns: 1fr; }
+    .cta-banner { flex-direction: column; padding: 3rem 1.5rem; }
+    footer { padding: 3rem 1.5rem 2rem; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Panimalar <span>Engineering College</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#programs">Programs</a></li>
+    <li><a href="#why">Why PEC</a></li>
+    <li><a href="#location">Campus</a></li>
+  </ul>
+  <a href="http://panimalaradmission.com/" target="_blank" class="nav-cta">Apply Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-lines"></div>
+  <div class="hero-accent"></div>
+  <div class="hero-accent2"></div>
+
+  <p class="hero-tag">Est. in Excellence — Chennai, Tamil Nadu</p>
+  <h1>Engineering <em>Minds</em><br>Building <em>Futures</em></h1>
+  <p class="hero-sub">Panimalar Engineering College stands as a beacon of technical education — where rigorous academics meet industry relevance, shaping the engineers of tomorrow.</p>
+  <div class="hero-actions">
+    <a href="http://panimalaradmission.com/" target="_blank" class="btn-primary">Begin Your Application</a>
+    <a href="#programs" class="btn-ghost">
+      Explore Programs
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M3 8h10M8 3l5 5-5 5"/>
+      </svg>
+    </a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">3.6★</div>
+      <div class="hero-stat-label">Google Rating</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">1200+</div>
+      <div class="hero-stat-label">Reviews</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">10+</div>
+      <div class="hero-stat-label">Departments</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">Chennai</div>
+      <div class="hero-stat-label">Poonamallee</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="divider" style="padding:0;margin-bottom:4rem;">
+    <div class="divider-line"></div>
+    <div class="divider-icon">Excellence in Engineering</div>
+    <div class="divider-line"></div>
+  </div>
+
+  <p class="section-tag">About the College</p>
+  <h2 class="section-title">A Legacy of <em>Academic</em><br>& Technical Excellence</h2>
+
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Panimalar Engineering College, located in Poonamallee, Chennai, is a premier institution dedicated to producing technically competent, ethically grounded, and industry-ready engineers.</p>
+      <p>Affiliated with Anna University and approved by AICTE, the college offers a range of undergraduate and postgraduate programmes designed to meet the demands of a rapidly evolving technological landscape.</p>
+      <p><strong>Our commitment</strong> is to cultivate not just engineers but innovators — individuals who lead with knowledge, solve with creativity, and contribute meaningfully to society.</p>
+      <p>With experienced faculty, state-of-the-art laboratories, and robust industry partnerships, Panimalar Engineering College provides an environment where potential is nurtured into achievement.</p>
+    </div>
+    <div class="about-img">
+      <div class="about-img-frame">
+        <div class="about-img-text">Where knowledge meets innovation and ambition meets opportunity.</div>
+      </div>
+      <div class="about-img-label">Poonamallee · Chennai</div>
+      <div class="about-img-badge">
+        <div class="about-img-badge-num">AICTE</div>
+        <div class="about-img-badge-text">Approved Institution</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section class="programs-bg" id="programs">
+  <p class="section-tag" style="color:var(--gold)">Academic Programmes</p>
+  <h2 class="section-title">Disciplines That<br><em>Define Tomorrow</em></h2>
+
+  <div class="programs-grid">
+    <div class="program-card">
+      <div class="program-num">01</div>
+      <div class="program-icon">
+        <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
+      </div>
+      <div class="program-name">Computer Science &amp; Engineering</div>
+      <div class="program-desc">Algorithms, AI, systems design, and software engineering — preparing graduates for the digital frontier.</div>
+      <a href="#" class="program-link">Learn More →</a>
+    </div>
+    <div class="program-card">
+      <div class="program-num">02</div>
+      <div class="program-icon">
+        <svg viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+      </div>
+      <div class="program-name">Electrical &amp; Electronics Engineering</div>
+      <div class="program-desc">Power systems, control engineering, and electronics driving modern infrastructure.</div>
+      <a href="#" class="program-link">Learn More →</a>
+    </div>
+    <div class="program-card">
+      <div class="program-num">03</div>
+      <div class="program-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+      </div>
+      <div class="program-name">Mechanical Engineering</div>
+      <div class="program-desc">Thermodynamics, manufacturing, design, and materials at the core of industrial innovation.</div>
+      <a href="#" class="program-link">Learn More →</a>
+    </div>
+    <div class="program-card">
+      <div class="program-num">04</div>
+      <div class="program-icon">
+        <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+      </div>
+      <div class="program-name">Electronics &amp; Communication</div>
+      <div class="program-desc">Signal processing, VLSI, embedded systems, and cutting-edge communication technologies.</div>
+      <a href="#" class="program-link">Learn More →</a>
+    </div>
+    <div class="program-card">
+      <div class="program-num">05</div>
+      <div class="program-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <div class="program-name">Information Technology</div>
+      <div class="program-desc">Database systems, networking, cloud computing, and enterprise software solutions.</div>
+      <a href="#" class="program-link">Learn More →</a>
+    </div>
+    <div class="program-card">
+      <div class="program-num">06</div>
+      <div class="program-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>
+      </div>
+      <div class="program-name">Civil Engineering</div>
+      <div class="program-desc">Structural analysis, urban planning, environmental engineering, and sustainable construction.</div>
+      <a href="#" class="program-link">Learn More →</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY PEC -->
+<section class="section" id="why">
+  <p class="section-tag">Why Choose Us</p>
+  <h2 class="section-title">The Panimalar<br><em>Difference</em></h2>
+
+  <div class="why-grid">
+    <div class="why-features">
+      <div class="why-feature">
+        <div class="why-feature-num">01</div>
+        <div class="why-feature-content">
+          <h4>Industry-Aligned Curriculum</h4>
+          <p>Our syllabi are continuously updated in collaboration with industry experts, ensuring graduates are equipped with skills employers demand on day one.</p>
+        </div>
+      </div>
+      <div class="why-feature">
+        <div class="why-feature-num">02</div>
+        <div class="why-feature-content">
+          <h4>Experienced Faculty</h4>
+          <p>Our faculty bring decades of academic research and industry experience, mentoring students with both theoretical depth and practical wisdom.</p>
+        </div>
+      </div>
+      <div class="why-feature">
+        <div class="why-feature-num">03</div>
+        <div class="why-feature-content">
+          <h4>Modern Infrastructure</h4>
+          <p>Fully equipped laboratories, digital libraries, and collaborative spaces designed to support hands-on learning and research innovation.</p>
+        </div>
+      </div>
+      <div class="why-feature">
+        <div class="why-feature-num">04</div>
+        <div class="why-feature-content">
+          <h4>Placement & Career Support</h4>
+          <p>A dedicated placement cell with strong corporate partnerships ensures our graduates are well-positioned for rewarding careers.</p>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="why-quote">
+        <p>Education is not the filling of a pail, but the lighting of a fire — we ignite curiosity, discipline, and ambition in every student.</p>
+        <div class="why-quote-attr">— Panimalar Engineering College Mission</div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-box">
+          <div class="stat-box-num">Anna</div>
+          <div class="stat-box-label">University Affiliated</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-box-num">AICTE</div>
+          <div class="stat-box-label">Approved</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-box-num">10+</div>
+          <div class="stat-box-label">Departments</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-box-num">1000s</div>
+          <div class="stat-box-label">Alumni Network</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="location-section" id="location">
+  <div>
+    <p class="section-tag">Our Campus</p>
+    <h2 class="section-title">Situated in the<br><em>Heart of Chennai</em></h2>
+    <div class="location-info">
+      <div class="location-item">
+        <div class="location-item-icon">
+          <svg viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </div>
+        <div class="location-item-text">
+          <h5>Address</h5>
+          <p>Bangalore Trunk Road, Varadharajapuram,<br>Poonamallee, Chennai, Tamil Nadu 600123</p>
+        </div>
+      </div>
+      <div class="location-item">
+        <div class="location-item-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+        </div>
+        <div class="location-item-text">
+          <h5>Phone</h5>
+          <p><a href="tel:09043890983" style="color:rgba(255,255,255,0.55);text-decoration:none;">090438 90983</a></p>
+        </div>
+      </div>
+      <div class="location-item">
+        <div class="location-item-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <div class="location-item-text">
+          <h5>Office Hours</h5>
+          <p>Monday – Friday: 8:00 AM – 5:00 PM<br>Saturday: 8:00 AM – 1:00 PM</p>
+        </div>
+      </div>
+      <div class="location-item">
+        <div class="location-item-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9"/></svg>
+        </div>
+        <div class="location-item-text">
+          <h5>Admissions Website</h5>
+          <p><a href="http://panimalaradmission.com/" target="_blank" style="color:var(--gold-light);text-decoration:none;">panimalaradmission.com</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="map-placeholder">
+    <svg viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+    <p>Poonamallee, Chennai</p>
+    <a href="https://maps.google.com/?q=Panimalar+Engineering+College+Chennai" target="_blank">View on Google Maps →</a>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner">
+  <h2>Ready to Begin Your<br><em>Engineering Journey?</em></h2>
+  <a href="http://panimalaradmission.com/" target="_blank" class="btn-dark">Apply for Admission</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo">Panimalar Engineering College</div>
+      <p>Shaping engineers who lead with knowledge, innovate with purpose, and contribute to the progress of society.</p>
+    </div>
+    <div class="footer-col">
+      <h6>Programmes</h6>
+      <ul>
+        <li><a href="#">Computer Science</a></li>
+        <li><a href="#">Electrical Engg.</a></li>
+        <li><a href="#">Mechanical Engg.</a></li>
+        <li><a href="#">ECE</a></li>
+        <li><a href="#">Civil Engg.</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h6>Campus</h6>
+      <ul>
+        <li><a href="#">About PEC</a></li>
+        <li><a href="#">Faculty</a></li>
+        <li><a href="#">Research</a></li>
+        <li><a href="#">Library</a></li>
+        <li><a href="#">Campus Life</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h6>Admissions</h6>
+      <ul>
+        <li><a href="http://panimalaradmission.com/" target="_blank">Apply Online</a></li>
+        <li><a href="#">Eligibility</a></li>
+        <li><a href="#">Fee Structure</a></li>
+        <li><a href="#">Scholarships</a></li>
+        <li><a href="tel:09043890983">Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Panimalar Engineering College. All rights reserved.</p>
+    <p>Bangalore Trunk Road, Poonamallee, Chennai 600123</p>
+  </div>
+</footer>
+
+</body>
+</html>
